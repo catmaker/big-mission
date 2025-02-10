@@ -1,0 +1,78 @@
+import { useBoards } from "@/hooks/use-board";
+import { useRouter } from "next/navigation";
+import { Card, CardHeader, CardTitle } from "./ui/card";
+import { formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale";
+
+export default function BoardList() {
+  const { data, isLoading, error } = useBoards();
+  const router = useRouter();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px] text-red-500">
+        데이터를 불러오는데 실패했습니다
+      </div>
+    );
+  }
+
+  const boards = data?.content || [];
+  const sortedBoards = [...boards].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+  const latestBoards = sortedBoards.slice(0, 6);
+  console.log(data);
+
+  return (
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {latestBoards.map((board: any) => (
+          <Card
+            key={board.id}
+            className="hover:shadow-lg transition-shadow h-[200px] cursor-pointer hover:scale-105 duration-150"
+            onClick={() => router.push(`/boards/${board.id}`)}
+          >
+            <CardHeader className="h-full flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    {board.category === "NOTICE" && (
+                      <span className="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded">
+                        공지
+                      </span>
+                    )}
+                    {board.category === "FREE" && (
+                      <span className="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">
+                        자유
+                      </span>
+                    )}
+                  </div>
+                  <time className="text-sm text-gray-500">
+                    {formatDistanceToNow(new Date(board.createdAt), {
+                      addSuffix: true,
+                      locale: ko,
+                    })}
+                  </time>
+                </div>
+                <CardTitle className="mt-4">{board.title}</CardTitle>
+              </div>
+
+              {/* 하단 정보 */}
+              <div className="mt-auto pt-4 text-sm text-gray-500">
+                작성자: 관리자
+              </div>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
