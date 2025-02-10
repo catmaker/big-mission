@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 import type { SignupForm } from "@/app/(auth)/signup/components/signup-validation";
+import type { SigninForm } from "@/app/(auth)/signin/components/signin-validation";
 import { AuthError } from "@/types/api";
+import { authStore } from "@/stores/auth-store";
 
 interface ApiErrorResponse {
   username?: string[];
@@ -37,5 +39,13 @@ authClient.interceptors.response.use(
 export const authService = {
   async signup(data: SignupForm): Promise<void> {
     await authClient.post("/auth/signup", data);
+  },
+
+  async signin(data: SigninForm): Promise<void> {
+    const response = await authClient.post("/auth/signin", data);
+    const { accessToken, refreshToken, user } = response.data;
+
+    authStore.setTokens(accessToken, refreshToken);
+    authStore.setUser(user);
   },
 };
