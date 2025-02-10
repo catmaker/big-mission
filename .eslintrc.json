@@ -1,23 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": ["next/core-web-vitals"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": false,
-        "tabWidth": 2,
-        "printWidth": 100,
-        "trailingComma": "es5"
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "indent": ["error", 2],
+    "quotes": ["error", "double"],
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "import", "next": "*" },
