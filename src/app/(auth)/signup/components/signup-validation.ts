@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const signupValidation = z
+export const signupSchema = z
   .object({
     username: z.string().email("올바른 이메일 형식이 아닙니다"),
     name: z
@@ -21,4 +21,4 @@ export const signupValidation = z
     path: ["confirmPassword"],
   });
 
-export type SignupForm = z.infer<typeof signupValidation>;
+export type SignupForm = z.infer<typeof signupSchema>;

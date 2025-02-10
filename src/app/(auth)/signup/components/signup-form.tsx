@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { signupValidation, type SignupForm } from "./signup-validation";
+import { signupSchema, type SignupForm } from "./signup-validation";
 import { FormField } from "./signup-form-field";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
 import { useSignupMutation } from "@/lib/mutations/auth";
 
 export function SignupForm() {
@@ -17,7 +18,7 @@ export function SignupForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignupForm>({
-    resolver: zodResolver(signupValidation),
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       username: "",
       name: "",
