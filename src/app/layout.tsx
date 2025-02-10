@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ToastProvider } from "@/providers/toast-provider";
+import QueryProviders from "@/providers/query-provider";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Bigs",
@@ -15,7 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ToastProvider>{children}</ToastProvider>
+        <QueryProviders>
+          <ToastProvider>
+            <Header />
+            {children}
+          </ToastProvider>
+        </QueryProviders>
+        <Footer />
       </body>
     </html>
   );
