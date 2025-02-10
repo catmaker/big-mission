@@ -1,3 +1,13 @@
-export interface ApiValidationError {
-  [key: string]: string[];
+export interface ApiErrorResponse {
+  message: string;
+}
+
+export class AuthError extends Error {
+  constructor(
+    message: string,
+    public statusCode?: number
+  ) {
+    super(message);
+    this.name = "AuthError";
+  }
 }

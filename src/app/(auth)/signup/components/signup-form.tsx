@@ -6,18 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signupValidation, type SignupForm } from "./signup-validation";
 import { FormField } from "./signup-form-field";
-import { authService, AuthError } from "@/lib/services/auth";
-import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSignupMutation } from "@/lib/mutations/auth";
 
 export function SignupForm() {
   const router = useRouter();
   const {
     register,
-
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignupForm>({
     resolver: zodResolver(signupValidation),
     defaultValues: {
@@ -28,25 +26,18 @@ export function SignupForm() {
     },
   });
 
-  const onSubmit = async (data: SignupForm) => {
-    try {
-      await authService.signup(data);
-      toast.success("회원가입에 성공했습니다.");
-      router.push("/signin");
-    } catch (error) {
-      console.error(error);
-      if (error instanceof AuthError) {
-        toast.error(error.message);
-      } else {
-        toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");
-      }
-    }
+  const { mutate: signup, isPending } = useSignupMutation(() => {
+    router.push("/signin");
+  });
+
+  const onSubmit = (data: SignupForm) => {
+    signup(data);
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`space-y-6 ${isSubmitting ? "opacity-50 pointer-events-none" : ""}`}
+      className={`space-y-6 ${isPending ? "opacity-50 pointer-events-none" : ""}`}
     >
       <div className="space-y-4">
         <FormField
@@ -56,7 +47,7 @@ export function SignupForm() {
           placeholder="example@email.com"
           register={register("username")}
           error={errors.username}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
 
         <FormField
@@ -66,7 +57,7 @@ export function SignupForm() {
           placeholder="홍길동"
           register={register("name")}
           error={errors.name}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
 
         <FormField
@@ -76,7 +67,7 @@ export function SignupForm() {
           placeholder="8자 이상 입력해주세요"
           register={register("password")}
           error={errors.password}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
 
         <FormField
@@ -86,20 +77,19 @@ export function SignupForm() {
           placeholder="비밀번호를 한번 더 입력해주세요"
           register={register("confirmPassword")}
           error={errors.confirmPassword}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
       </div>
 
       <div className="pt-4">
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isPending}
           className="w-full h-12 text-base bg-[#0076DF] hover:bg-[#2e91e7] rounded-xl disabled:opacity-50"
         >
-          {isSubmitting ? (
+          {isPending ? (
             <div className="flex items-center justify-center gap-2">
               <Spinner className="h-5 w-5 text-white" />
-              <span>가입하기</span>
             </div>
           ) : (
             "가입하기"
