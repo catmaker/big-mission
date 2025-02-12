@@ -8,7 +8,7 @@ export default function BoardSection() {
   const router = useRouter();
 
   return (
-    <section className="py-16">
+    <section>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-semibold mb-2">게시판</h2>
