@@ -3,7 +3,7 @@
 import { Separator } from "@/components/ui/separator";
 import BoardListPagination from "@/components/board-list-pagination";
 import { Button } from "@/components/ui/button";
-import { PenSquare } from "lucide-react"; // 글쓰기 아이콘
+import { PenSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function BoardsPage() {

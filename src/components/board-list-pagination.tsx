@@ -30,18 +30,19 @@ export default function BoardListPagination() {
   const { data: fullData, isLoading: fullLoading } = useQuery({
     queryKey: ["boards", "full"],
     queryFn: () => boardService.getBoards(0, 10000),
-    enabled: !!initialData, // 초기 데이터 로드 후에만 실행
+    enabled: !!initialData, 
   });
 
-  // 사용할 데이터 선택
   const data = fullData || initialData;
 
   const filteredBoards = useMemo(() => {
-    const boards = data?.content || [];
-    if (selectedCategory === "ALL") return boards;
-    return boards.filter((board) => board.category === selectedCategory);
+    const boards = [...(data?.content || [])].sort((a, b) => b.id - a.id);
+    
+    return selectedCategory === "ALL" 
+      ? boards 
+      : boards.filter((board) => board.category === selectedCategory);
   }, [data?.content, selectedCategory]);
-
+  
   const currentBoards = filteredBoards.slice(
     currentPage * displaySize,
     (currentPage + 1) * displaySize
