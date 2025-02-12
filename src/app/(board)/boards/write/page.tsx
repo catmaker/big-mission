@@ -11,7 +11,11 @@ export default function WritePage() {
   });
 
   const onSubmit = async (data: any) => {
-    createBoard.mutate(data);
+    try {
+      await createBoard.mutateAsync(data);
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (

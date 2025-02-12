@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 
 interface WriteFormProps {
   onSubmit: (data: WriteForm) => Promise<void>;
@@ -45,7 +46,14 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={async (e) => {
+        e.preventDefault();
+        await form.handleSubmit(async (data) => {
+          console.log("📝 폼 제출 시작", data);
+          await onSubmit(data);
+          console.log("✅ 폼 제출 완료");
+        })(e);
+      }} className="space-y-8">
         <div className="space-y-6">
           <FormField
             control={form.control}
@@ -79,7 +87,7 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
                 <FormControl>
                   <Input
                     placeholder="제목을 입력하세요"
-                    className="text-xl h-14 px-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0"
+                    className="text-sm h-14 px-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0"
                     {...field}
                   />
                 </FormControl>
@@ -96,7 +104,7 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
                 <FormControl>
                   <Textarea
                     placeholder="내용을 입력하세요"
-                    className="min-h-[400px] p-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0 resize-none"
+                    className="min-h-[400px] p-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0 resize-none text-sm"
                     {...field}
                   />
                 </FormControl>
@@ -146,13 +154,13 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
           <Button
             type="submit"
             disabled={isDisabled}
-            className={`px-6 h-11 rounded-xl ${
+            className={`px-6 h-11 rounded-xl min-w-[100px] ${
               isDisabled
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-black hover:bg-gray-800"
             }`}
           >
-            {isSubmitting ? "작성 중..." : "작성하기"}
+            {isSubmitting ? <Spinner/> : "작성하기"}
           </Button>
         </div>
       </form>

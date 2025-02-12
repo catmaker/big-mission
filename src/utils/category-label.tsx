@@ -9,9 +9,9 @@ interface CategoryLabelProps {
 export function CategoryLabel({ category, className }: CategoryLabelProps) {
   const styles = {
     NOTICE: "bg-red-500 text-white",
-    FREE: "bg-gray-500 text-gray-600",
-    QNA: "bg-blue-500 text-blue-600",
-    ETC: "bg-gray-500 text-gray-600",
+    FREE: "bg-gray-100 text-gray-600",
+    QNA: "bg-indigo-600 text-white",
+    ETC: "bg-gray-300 text-gray-600",
   };
 
   const labels = {
