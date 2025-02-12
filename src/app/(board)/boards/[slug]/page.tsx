@@ -1,7 +1,6 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { NextImageComponent } from "@/components/next-image-component";
 import { BoardHeader } from "./components/board-header";
 import { BoardActions } from "./components/board-actions";
@@ -13,7 +12,6 @@ export default function BoardDetailPage({
   params: { slug: string };
 }) {
   const { data: post, isLoading } = useBoardDetailQuery(params.slug);
-  const BASE_URL = "https://front-mission.bigs.or.kr";
 
   if (isLoading || !post) {
     return null;
@@ -34,7 +32,7 @@ export default function BoardDetailPage({
           <div className="p-6 flex-grow">
             <div className="flex justify-center">
               <a
-                href={`${BASE_URL}${post.imageUrl}`}
+                href={`${process.env.BASE_URL}${post.imageUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="max-w-3xl w-full"

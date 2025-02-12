@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { boardService } from "@/lib/services/board";
-import type { Board } from "@/types/board";
 import boardClient from "@/lib/services/board";
+import { useRouter } from "next/navigation";
 
 import type {
   BoardListResponse,
@@ -115,16 +115,24 @@ export function useUpdateBoardMutation(boardId: string, onSuccess?: () => void) 
 
 export function useDeleteBoardMutation(onSuccess?: () => void) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
-    mutationFn: (id: number) => boardService.deleteBoard(id),
-    onSuccess: () => {
-      toast.success("게시글이 삭제되었습니다.");
+    mutationFn: (boardId: number) => boardService.deleteBoard(boardId),
+    onSuccess: async (_, boardId) => {
+      queryClient.removeQueries({ queryKey: ["boards", boardId] });
       queryClient.invalidateQueries({ queryKey: ["boards"] });
+      
+      toast.success("게시글이 삭제되었습니다!");
+
+      queryClient.cancelQueries({ queryKey: ["boards", boardId] });
+      
+      router.push("/boards");
+      
       onSuccess?.();
     },
     onError: (error: Error) => {
-      toast.error(error.message);
+      toast.error(error.message || "게시글 삭제에 실패했습니다");
     },
   });
 }

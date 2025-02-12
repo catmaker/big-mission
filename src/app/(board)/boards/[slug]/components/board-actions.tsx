@@ -21,9 +21,7 @@ interface BoardActionsProps {
 
 export function BoardActions({ boardId }: BoardActionsProps) {
   const router = useRouter();
-  const deleteBoard = useDeleteBoardMutation(() => {
-    router.push("/boards");
-  });
+  const deleteBoard = useDeleteBoardMutation();
 
   return (
     <div className="border-t mt-auto flex">
