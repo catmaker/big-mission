@@ -3,7 +3,6 @@
 import { WriteForm } from "./components/write-form";
 import { useCreateBoardMutation } from "@/lib/mutations/board";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
 
 export default function WritePage() {
   const router = useRouter();
