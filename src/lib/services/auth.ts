@@ -28,9 +28,7 @@ const authClient = axios.create({
 authClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError<ApiErrorResponse>) => {
-    console.log("인터셉터 에러:", error);  // 디버깅용
     
-    // 응답이 있고 데이터가 있는 경우
     if (error.response?.data) {
       const { data } = error.response;
       
@@ -42,12 +40,10 @@ authClient.interceptors.response.use(
       }
     }
     
-    // 응답이 아예 없는 경우에만 네트워크 에러
     if (!error.response) {
       throw new AuthError("네트워크 연결을 확인해주세요.");
     }
 
-    // 기타 에러
     throw new AuthError("요청 처리 중 오류가 발생했습니다.");
   }
 );

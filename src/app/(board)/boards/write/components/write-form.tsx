@@ -49,9 +49,7 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
       <form onSubmit={async (e) => {
         e.preventDefault();
         await form.handleSubmit(async (data) => {
-          console.log("📝 폼 제출 시작", data);
           await onSubmit(data);
-          console.log("✅ 폼 제출 완료");
         })(e);
       }} className="space-y-8">
         <div className="space-y-6">

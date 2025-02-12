@@ -38,7 +38,6 @@ export default function BoardList() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
   const latestBoards = sortedBoards.slice(0, 6);
-  console.log(data);
 
   return (
     <div className="w-full max-w-6xl mx-auto">

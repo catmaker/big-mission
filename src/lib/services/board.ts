@@ -56,7 +56,6 @@ boardClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        console.log("🔄 토큰 갱신 시도");
         const response = await fetch(
           "https://front-mission.bigs.or.kr/auth/refresh",
           {
@@ -69,13 +68,11 @@ boardClient.interceptors.response.use(
         );
 
         if (!response.ok) {
-          console.log("❌ 토큰 갱신 실패 - 로그아웃");
           authStore.logout();
           throw new Error("인증이 만료되었습니다. 다시 로그인해주세요.");
         }
 
         const data = await response.json();
-        console.log("✅ 토큰 갱신 성공");
 
         // 새 토큰 저장
         authStore.setTokens(data.accessToken, data.refreshToken);
@@ -85,7 +82,6 @@ boardClient.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
         return boardClient(originalRequest);
       } catch (refreshError) {
-        console.error("❌ 토큰 갱신 중 에러:", refreshError);
         authStore.logout();
         throw new Error("인증 처리 중 오류가 발생했습니다.");
       }

@@ -25,20 +25,12 @@ export function SigninForm() {
   });
 
   const { mutate, isPending } = useSigninMutation(() => {
-    console.log("로그인 성공");
-    console.log("localStorage 상태:", {
-      accessToken: localStorage.getItem("accessToken"),
-      refreshToken: localStorage.getItem("refreshToken"),
-    });
-    console.log("쿠키 상태:", document.cookie);
-
     setTimeout(() => {
       window.location.href = "/";
     }, 500);
   });
 
   const onSubmit = (data: SigninForm) => {
-    console.log("로그인 시도:", data);
     mutate(data);
   };
 
