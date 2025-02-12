@@ -127,7 +127,7 @@ export const boardService = {
 
   // 게시글 수정
   async updateBoard(id: number, formData: FormData): Promise<Board> {
-    const response = await boardClient.put<Board>(`/boards/${id}`, formData, {
+    const response = await boardClient.patch<Board>(`/boards/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

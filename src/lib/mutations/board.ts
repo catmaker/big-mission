@@ -74,19 +74,41 @@ export function useCreateBoardMutation(onSuccess?: () => void) {
   });
 }
 
-export function useUpdateBoardMutation(id: number, onSuccess?: () => void) {
+export function useUpdateBoardMutation(boardId: string, onSuccess?: () => void) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (formData: FormData) => boardService.updateBoard(id, formData),
+    mutationFn: async (data: any) => {
+      const formData = new FormData();
+
+      // request 필드에 JSON Blob 추가
+      const requestBlob = new Blob(
+        [
+          JSON.stringify({
+            title: data.title,
+            content: data.content,
+            category: data.category,
+          }),
+        ],
+        { type: "application/json" }
+      );
+      formData.append("request", requestBlob);
+
+      // 파일이 있으면 추가
+      if (data.file?.[0]) {
+        formData.append("file", data.file[0]);
+      }
+
+      return boardService.updateBoard(Number(boardId), formData);
+    },
     onSuccess: () => {
-      toast.success("게시글이 수정되었습니다.");
-      queryClient.invalidateQueries({ queryKey: ["boards", id] });
+      toast.success("게시글이 수정되었습니다!");
+      queryClient.invalidateQueries({ queryKey: ["boards", Number(boardId)] });
       queryClient.invalidateQueries({ queryKey: ["boards"] });
       onSuccess?.();
     },
     onError: (error: Error) => {
-      toast.error(error.message);
+      toast.error(error.message || "게시글 수정에 실패했습니다");
     },
   });
 }
