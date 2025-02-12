@@ -18,13 +18,27 @@ import { Input } from "@/components/ui/input";
 export function SigninForm() {
   const form = useForm<SigninForm>({
     resolver: zodResolver(signinSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
   });
 
   const { mutate, isPending } = useSigninMutation(() => {
-    window.location.href = "/";
+    console.log("로그인 성공");
+    console.log("localStorage 상태:", {
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken"),
+    });
+    console.log("쿠키 상태:", document.cookie);
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 500);
   });
 
   const onSubmit = (data: SigninForm) => {
+    console.log("로그인 시도:", data);
     mutate(data);
   };
 
