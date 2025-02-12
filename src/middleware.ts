@@ -31,7 +31,6 @@ export async function middleware(request: NextRequest) {
   // 토큰 디코딩 (로그용)
   const tokenData = parseJwt(accessToken);
 
-  // 토큰이 있으면 일단 통과시켜야 함 여기서 막으면 중복 검증으로 인해 로그인
   return NextResponse.next();
 }
 

@@ -11,6 +11,13 @@ export function useQueryErrorHandler() {
 
     const getErrorMessage = (error: unknown) => {
       if (error instanceof AxiosError) {
+        if (error.response?.data?.message) {
+          return error.response.data.message;
+        }
+        if (error.response?.data?.username?.[0]) {
+          return error.response.data.username[0];
+        }
+    
         const status = error.response?.status;
 
         switch (status) {
