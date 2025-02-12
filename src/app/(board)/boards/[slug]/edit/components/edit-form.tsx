@@ -95,7 +95,7 @@ export function EditForm({
                 <FormControl>
                   <Input
                     placeholder="제목을 입력하세요"
-                    className="text-xl h-14 px-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0"
+                    className="text-sm h-14 px-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0"
                     {...field}
                   />
                 </FormControl>
@@ -112,7 +112,7 @@ export function EditForm({
                 <FormControl>
                   <Textarea
                     placeholder="내용을 입력하세요"
-                    className="min-h-[400px] p-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0 resize-none"
+                    className="min-h-[400px] p-4 rounded-xl bg-white border-gray-300 focus:border-gray-500 focus:ring-0 resize-none text-sm"
                     {...field}
                   />
                 </FormControl>

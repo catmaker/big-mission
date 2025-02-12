@@ -26,7 +26,7 @@ export default function BoardEditPage({ params }: { params: { slug: string } }) 
   return (
     <div className="min-h-screen bg-[#fbfbfd] py-24">
       <div className="container mx-auto px-4">
-        <div className="max-w-[800px] mx-auto py-12">
+        <div className="max-w-[800px] mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-semibold tracking-tight">
               게시글 수정
