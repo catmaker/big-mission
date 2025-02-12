@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { authService } from "@/lib/services/auth";
 import { AuthError } from "@/types/api";
-import { SigninForm } from "@/app/(auth)/signin/components/signin-validation";
 
 interface SigninResponse {
   accessToken: string;
@@ -35,13 +34,10 @@ export function useSigninMutation(onSuccess?: () => void) {
       toast.success("로그인에 성공했습니다.");
       onSuccess?.();
     },
-    onError: (error: unknown) => {
-      console.error("mutation 에러:", error);
-      if (error instanceof AuthError) {
-        toast.error(error.message);
-      } else {
-        toast.error("로그인에 실패했습니다. 다시 시도해주세요.");
-      }
+    onError: (error: any) => {
+      const errorMessage = error.message || "로그인에 실패했습니다. 잠시 후 다시 시도해주세요.";
+      toast.error(errorMessage);
+      console.error("로그인 실패:", error);
     },
   });
 }
