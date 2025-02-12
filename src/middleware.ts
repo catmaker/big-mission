@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
   const tokenData = parseJwt(accessToken);
   console.log("토큰 페이로드:", tokenData);
 
-  // 토큰이 있으면 일단 통과시켜야 함 여기서 막으면 중복 검증으로 인해 로그인 페이지로 이동함
+  // 토큰이 있으면 일단 통과시켜야 함 여기서 막으면 중복 검증으로 인해 로그인
   console.log("✅ 토큰 확인됨 - 통과");
   return NextResponse.next();
 }
