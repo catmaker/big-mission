@@ -5,11 +5,17 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { authStore } from "@/stores/auth-store";
 
-export default function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+export default function Header({ className }: HeaderProps) {
   const router = useRouter();
 
   return (
-    <nav className="bg-[rgba(251,251,253,0.8)] backdrop-blur-md fixed w-full z-50 border-b border-gray-200/80">
+    <nav
+      className={`bg-[rgba(251,251,253,0.8)] backdrop-blur-md fixed w-full z-50 border-b border-gray-200/80 ${className}`}
+    >
       <div className="container mx-auto px-4">
         <div className="h-12 flex items-center justify-between">
           <div className="text-sm font-medium space-x-8">
