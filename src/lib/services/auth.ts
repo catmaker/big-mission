@@ -8,6 +8,14 @@ interface ApiErrorResponse {
   username?: string[];
   message?: string;
 }
+interface SigninResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    username: string;
+    name: string;
+  };
+}
 
 const authClient = axios.create({
   baseURL: "https://front-mission.bigs.or.kr",
@@ -41,11 +49,16 @@ export const authService = {
     await authClient.post("/auth/signup", data);
   },
 
-  async signin(data: SigninForm): Promise<void> {
-    const response = await authClient.post("/auth/signin", data);
+  async signin(data: SigninForm): Promise<SigninResponse> {
+    const response = await authClient.post<SigninResponse>(
+      "/auth/signin",
+      data
+    );
     const { accessToken, refreshToken, user } = response.data;
 
     authStore.setTokens(accessToken, refreshToken);
-    authStore.setUser(user);
+    authStore.user = user;
+
+    return response.data;
   },
 };
