@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { EditFormComponent } from "./components/edit-form";
-import { EditForm } from "./components/edit-validation";
+import { EditForm } from "./components/edit-form";
+import { EditForm as EditFormType } from "./components/edit-validation";
 import { useUpdateBoardMutation, useBoardDetailQuery } from "@/lib/mutations/board";
 import LoadingSkeleton from "./components/skeleton";
 
@@ -15,7 +15,7 @@ export default function BoardEditPage({ params }: { params: { slug: string } }) 
   });
 
 
-  const onSubmit = async (data: EditForm) => {
+  const onSubmit = async (data: EditFormType) => {
     updateBoard.mutate(data);
   };
 
@@ -34,7 +34,7 @@ export default function BoardEditPage({ params }: { params: { slug: string } }) 
             <p className="mt-2 text-gray-500">게시글 내용을 수정해주세요</p>
           </div>
 
-          <EditFormComponent
+          <EditForm
             post={post}
             onSubmit={onSubmit}
             onCancel={() => router.back()}

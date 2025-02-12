@@ -35,9 +35,18 @@ export function useSigninMutation(onSuccess?: () => void) {
       onSuccess?.();
     },
     onError: (error: any) => {
-      const errorMessage = error.message || "로그인에 실패했습니다. 잠시 후 다시 시도해주세요.";
-      toast.error(errorMessage);
-      console.error("로그인 실패:", error);
+      console.log('전체 에러 객체:', error);
+      console.log('에러 응답:', error.response);
+      console.log('에러 메시지:', error.message);
+      
+      // 서버 응답이 있는 경우와 없는 경우를 구분
+      if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
+      }
     },
   });
 }
