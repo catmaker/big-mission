@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ToastProvider } from "@/providers/toast-provider";
-import QueryProviders from "@/providers/query-provider";
-import Header from "@/components/header";
-import { AuthInitializer } from "@/auth/auth-initializer";
+import { Providers } from "@/providers";
 
 export const metadata: Metadata = {
   title: "Bigs",
@@ -16,15 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <AuthInitializer />
-        <QueryProviders>
-          <ToastProvider>
-            <Header />
-            {children}
-          </ToastProvider>
-        </QueryProviders>
+    <html lang="en" className="h-full">
+      <body className="min-h-full flex flex-col">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
