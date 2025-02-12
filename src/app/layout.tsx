@@ -5,6 +5,9 @@ import { Providers } from "@/providers";
 export const metadata: Metadata = {
   title: "Bigs",
   description: "Bigs",
+  icons: {
+    icon: "/imgs/Logo.png",
+  },
 };
 
 export default function RootLayout({
