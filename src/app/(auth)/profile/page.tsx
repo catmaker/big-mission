@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
 import { LogOut, User, Key, Shield } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const ProfilePage = observer(() => {
   const [isClient, setIsClient] = useState(false);
@@ -32,9 +33,7 @@ const ProfilePage = observer(() => {
 
       <div className="space-y-6">
         <Card className="p-4 md:p-8">
-          {/* 모바일에서는 세로 배치, 데스크톱에서는 가로 배치 */}
           <div className="flex flex-col md:flex-row md:items-start md:space-x-8 space-y-6 md:space-y-0">
-            {/* 아바타 섹션 - 모바일에서 중앙 정렬 */}
             <div className="flex justify-center md:justify-start">
               <Avatar className="h-20 w-20 md:h-24 md:w-24 ring-2 ring-primary/10">
                 <AvatarFallback className="text-xl md:text-2xl bg-primary/5">
@@ -44,7 +43,6 @@ const ProfilePage = observer(() => {
             </div>
 
             <div className="flex-1 space-y-6">
-              {/* 기본 정보 */}
               <div className="grid grid-cols-1 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <div className="flex items-center text-sm text-muted-foreground">
@@ -65,8 +63,9 @@ const ProfilePage = observer(() => {
                 </div>
               </div>
 
-              {/* 구분선 */}
-              <div className="border-t pt-6">
+              <Separator className="my-4" />
+
+              <div>
                 <div className="flex items-center mb-4">
                   <Shield className="w-5 h-5 mr-2" />
                   <h3 className="text-lg font-semibold">계정 보안</h3>
