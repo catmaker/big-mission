@@ -9,6 +9,7 @@ import type {
   CreateBoardDto,
   UpdateBoardDto,
 } from "@/types/board";
+import { WriteForm as WriteFormType } from "@/app/(board)/boards/write/components/write-validation";
 
 // Query Keys
 export const boardKeys = {
@@ -42,7 +43,7 @@ export function useCreateBoardMutation(onSuccess?: () => void) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: WriteFormType) => {
       const formData = new FormData();
 
       // request 필드에 JSON Blob 추가
@@ -81,7 +82,7 @@ export function useUpdateBoardMutation(boardId: string, onSuccess?: () => void) 
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: WriteFormType) => {
       const formData = new FormData();
 
       // request 필드에 JSON Blob 추가

@@ -7,6 +7,7 @@ import { ko } from "date-fns/locale";
 import { useBoardListQuery } from "@/lib/mutations/board";
 import { LoadingState } from "./ui/loading-state";
 import { useEffect, useState } from "react";
+import { Board } from "@/types/board";
 
 export default function BoardList() {
   const { data, error } = useBoardListQuery(0, 10);
@@ -28,7 +29,7 @@ export default function BoardList() {
   if (error) {
     return (
       <div className="flex justify-center items-center min-h-[400px] text-red-500">
-        데이터를 불러오는데 실패했습니다
+        데이터를 불러오지 못했어요 😂 다시 시도해주세요.
       </div>
     );
   }
@@ -38,11 +39,10 @@ export default function BoardList() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
   const latestBoards = sortedBoards.slice(0, 6);
-
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {latestBoards.map((board: any) => (
+        {latestBoards.map((board: Board) => (
           <Card
             key={board.id}
             className="hover:shadow-lg transition-shadow h-[200px] cursor-pointer hover:scale-105 duration-150"
@@ -71,11 +71,6 @@ export default function BoardList() {
                   </time>
                 </div>
                 <CardTitle className="mt-4">{board.title}</CardTitle>
-              </div>
-
-              {/* 하단 정보 */}
-              <div className="mt-auto pt-4 text-sm text-gray-500">
-                작성자: 관리자
               </div>
             </CardHeader>
           </Card>

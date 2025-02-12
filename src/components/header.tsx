@@ -20,9 +20,6 @@ export default function Header({ className }: HeaderProps) {
 
   if (!isClient) return null;
 
-  const userName = authStore.user?.name;
-  const userUserName = authStore.user?.username;
-
   return (
     <nav
       className={`bg-[rgba(251,251,253,0.8)] backdrop-blur-md fixed w-full z-50 border-b border-gray-200/80 ${className}`}

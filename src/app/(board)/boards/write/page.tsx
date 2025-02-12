@@ -3,6 +3,7 @@
 import { WriteForm } from "./components/write-form";
 import { useCreateBoardMutation } from "@/lib/mutations/board";
 import { useRouter } from "next/navigation";
+import { WriteForm as WriteFormType } from "./components/write-validation";
 
 export default function WritePage() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function WritePage() {
     router.push("/boards");
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: WriteFormType) => {
     try {
       await createBoard.mutateAsync(data);
     } catch (error) {

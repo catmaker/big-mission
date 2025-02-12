@@ -5,6 +5,7 @@ import { EditForm } from "./components/edit-form";
 import { EditForm as EditFormType } from "./components/edit-validation";
 import { useUpdateBoardMutation, useBoardDetailQuery } from "@/lib/mutations/board";
 import LoadingSkeleton from "./components/skeleton";
+import { Board } from "@/types/board";
 
 export default function BoardEditPage({ params }: { params: { slug: string } }) {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function BoardEditPage({ params }: { params: { slug: string } }) 
           </div>
 
           <EditForm
-            post={post}
+            post={post as Board}
             onSubmit={onSubmit}
             onCancel={() => router.back()}
             isSubmitting={updateBoard.isPending}

@@ -24,9 +24,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Board } from "@/types/board";
 
 interface EditFormProps {
-  post: any;
+  post: Board;
   onSubmit: (data: EditFormType) => void;
   onCancel: () => void;
   isSubmitting: boolean;
@@ -39,13 +40,12 @@ export function EditForm({
   isSubmitting,
 }: EditFormProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-
   const form = useForm<EditFormType>({
     resolver: zodResolver(EditSchema),
     defaultValues: {
       title: post?.title || "",
       content: post?.content || "",
-      category: post?.category || "FREE",
+      category: (post?.category as "NOTICE" | "FREE" | "QNA" | "ETC") || "FREE",
     },
   });
 
