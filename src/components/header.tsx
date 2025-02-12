@@ -33,16 +33,16 @@ export default function Header({ className }: HeaderProps) {
           <div className="text-sm font-medium space-x-8">
             <Image
               className="cursor-pointer"
-              src="/bigsLogo.png"
+              src="/imgs/Logo.png"
               alt="logo"
-              width={100}
-              height={100}
+              width={40}
+              height={40}
               onClick={() => router.push("/")}
             />
           </div>
           <div className="space-x-4">
             {authStore.isAuthenticated ? (
-              <>
+              <div className="flex items-center gap-1">
                 <Button
                   variant="ghost"
                   className="text-sm"
@@ -64,9 +64,9 @@ export default function Header({ className }: HeaderProps) {
                 >
                   로그아웃
                 </Button>
-              </>
+              </div>
             ) : (
-              <>
+              <div className="flex items-center space-x-2">
                 <Button
                   variant="ghost"
                   className="text-sm"
@@ -81,7 +81,7 @@ export default function Header({ className }: HeaderProps) {
                 >
                   회원가입
                 </Button>
-              </>
+              </div>
             )}
           </div>
         </div>

@@ -38,8 +38,8 @@ export function BoardListHeader({
   ];
 
   return (
-    <div className="flex justify-between items-center mb-4">
-      <div className="text-sm text-gray-500">
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-4 whitespace-nowrap">
+      <div className="text-sm text-gray-500 mb-2 sm:mb-0">
         총 {(totalPosts ?? 0).toLocaleString()}개의 게시글
       </div>
       <div className="flex gap-4">
@@ -48,7 +48,7 @@ export function BoardListHeader({
           onValueChange={onCategoryChange}
           disabled={disableCategory}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[120px]">
             <SelectValue placeholder="카테고리 선택" />
           </SelectTrigger>
           <SelectContent>
@@ -64,7 +64,7 @@ export function BoardListHeader({
           value={displaySize.toString()}
           onValueChange={onDisplaySizeChange}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[120px]">
             <SelectValue placeholder="페이지당 게시글 수" />
           </SelectTrigger>
           <SelectContent>

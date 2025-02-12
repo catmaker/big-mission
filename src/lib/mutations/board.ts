@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { boardService } from "@/lib/services/board";
 import boardClient from "@/lib/services/board";
 import { useRouter } from "next/navigation";
-
+import { authStore } from "@/stores/auth-store";
 import type {
   BoardListResponse,
   CreateBoardDto,
@@ -21,9 +21,12 @@ export const boardKeys = {
 
 // Queries
 export function useBoardListQuery(page: number, size: number) {
+  const token = authStore.getToken();
   return useQuery<BoardListResponse>({
     queryKey: boardKeys.list(page, size),
     queryFn: () => boardService.getBoards(page, size),
+    retry: 1,
+    enabled: !!token,
   });
 }
 

@@ -26,13 +26,7 @@ interface BoardListTableProps {
 }
 
 const columns: ColumnDef<Board>[] = [
-  {
-    accessorKey: "id",
-    header: () => <div className="text-center w-[80px]">번호</div>,
-    cell: ({ row }) => (
-      <div className="text-center w-[80px]">{row.original.id}</div>
-    ),
-  },
+
   {
     accessorKey: "category",
     header: () => <div className="text-center w-[120px]">카테고리</div>,
@@ -46,20 +40,20 @@ const columns: ColumnDef<Board>[] = [
     accessorKey: "title",
     header: () => <div className="pl-4 flex-1">제목</div>,
     cell: ({ row }) => (
-      <div className="pl-4 font-medium flex-1">{row.original.title}</div>
+      <div className="pl-4 font-medium truncate whitespace-nowrap">{row.original.title}</div>
     ),
   },
   {
     accessorKey: "createdAt",
     header: () => (
-      <div className="text-right pr-4 w-[140px] min-w-[140px] max-w-[140px]">
+      <div className="text-end pr-4 w-[140px] min-w-[140px] max-w-[140px]">
         작성일
       </div>
     ),
     cell: ({ row }) => {
       const date = row.original.createdAt;
       return (
-        <div className="text-right text-gray-500 text-sm pr-4 w-[140px] min-w-[140px] max-w-[140px] whitespace-nowrap">
+        <div className="text-end text-gray-500 text-sm pr-4 w-[140px] min-w-[140px] max-w-[140px] whitespace-nowrap">
           {date &&
             formatDistanceToNow(new Date(date), {
               addSuffix: true,

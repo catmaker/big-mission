@@ -1,17 +1,26 @@
-import { useBoards } from "@/hooks/use-board";
+"use client";
+
 import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle } from "./ui/card";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
+import { useBoardListQuery } from "@/lib/mutations/board";
+import { LoadingState } from "./ui/loading-state";
+import { useEffect, useState } from "react";
 
 export default function BoardList() {
-  const { data, isLoading, error } = useBoards();
+  const { data, error } = useBoardListQuery(0, 10);
   const router = useRouter();
-
-  if (isLoading) {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => { 
+    setIsMounted(true);
+  }, []);
+  
+  if (!isMounted) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin"></div>
+        <LoadingState />
       </div>
     );
   }

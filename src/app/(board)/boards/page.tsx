@@ -11,7 +11,7 @@ export default function BoardsPage() {
 
   return (
     <div className="min-h-screen bg-[#fbfbfd] py-24">
-      <div className="container mx-auto px-4 w-4/5">
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-semibold tracking-tight">게시판</h1>
           <Button

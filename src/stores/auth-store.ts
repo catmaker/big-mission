@@ -224,6 +224,14 @@ class AuthStore {
     return !!this.accessToken;
   }
 
+  getToken() {
+    if (typeof window === "undefined") {  
+      return null;
+    }
+    return localStorage.getItem("accessToken");
+  }
+
+
   logout() {
     console.log("👋 로그아웃");
     this.clearTokens();
