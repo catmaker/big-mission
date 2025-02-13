@@ -10,7 +10,10 @@ export const writeSchema = z.object({
     .min(1, "내용을 입력해주세요")
     .max(2000, "내용은 2000자 이내로 입력해주세요"),
   category: z.enum(["NOTICE", "FREE", "QNA", "ETC"]).default("FREE"),
-  file: z.instanceof(FileList).optional(),
+  file:
+    typeof window === "undefined"
+      ? z.any().optional()
+      : z.instanceof(FileList).optional(),
 });
 
 export type WriteForm = z.infer<typeof writeSchema>;
