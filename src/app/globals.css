@@ -9,8 +9,15 @@
   font-weight: 400;
   font-style: normal;
 }
+/* 전체 레이아웃 스타일 */
 body {
-  font-family: "Pretendard", sans-serif;
+  overflow: hidden; /* body의 스크롤을 없애고 */
+}
+
+/* main 영역 스크롤 스타일 */
+main {
+  height: calc(100vh - 64px); /* 헤더 높이(64px)를 제외한 높이 */
+  overflow-y: auto;
 }
 @layer base {
   :root {

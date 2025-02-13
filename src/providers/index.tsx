@@ -17,8 +17,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryProviders>
       <ToastProvider>
         <ErrorBoundary>
-          <Header className="shrink-0" />
-          <main className="flex-grow">{children}</main>
+          <div className="flex flex-col h-screen">
+            <Header className="shrink-0" />
+            <main className="flex-grow overflow-y-auto">{children}</main>
+          </div>
           <Footer className="shrink-0" />
         </ErrorBoundary>
       </ToastProvider>

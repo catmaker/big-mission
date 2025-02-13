@@ -46,12 +46,15 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={async (e) => {
-        e.preventDefault();
-        await form.handleSubmit(async (data) => {
-          await onSubmit(data);
-        })(e);
-      }} className="space-y-8">
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await form.handleSubmit(async (data) => {
+            await onSubmit(data);
+          })(e);
+        }}
+        className="space-y-8"
+      >
         <div className="space-y-6">
           <FormField
             control={form.control}
@@ -158,7 +161,7 @@ export function WriteForm({ onSubmit }: WriteFormProps) {
                 : "bg-black hover:bg-gray-800"
             }`}
           >
-            {isSubmitting ? <Spinner/> : "작성하기"}
+            {isSubmitting ? <Spinner /> : "작성하기"}
           </Button>
         </div>
       </form>
