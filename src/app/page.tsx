@@ -13,10 +13,10 @@ export default function Home() {
       <section className="pt-32 pb-24 text-center">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto space-y-6">
-            <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent sm:text-5xl">
               프론트엔드 게시판
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg text-gray-600 sm:text-xl">
               간단하고 직관적인 게시판 서비스를 경험해보세요
             </p>
             <div className="pt-4">
@@ -42,18 +42,18 @@ export default function Home() {
               {
                 title: "게시글 작성",
                 description: "마크다운 에디터로 쉽고 빠르게 글을 작성하세요",
-                icon: "✍️"
+                icon: "✍️",
               },
               {
                 title: "카테고리",
                 description: "공지사항, 자유게시판, Q&A 등 다양한 카테고리",
-                icon: "📑"
+                icon: "📑",
               },
               {
                 title: "이미지 첨부",
                 description: "게시글에 이미지를 자유롭게 첨부할 수 있습니다",
-                icon: "🖼️"
-              }
+                icon: "🖼️",
+              },
             ].map((feature) => (
               <div
                 key={feature.title}
@@ -61,7 +61,9 @@ export default function Home() {
                          transition-all duration-200 hover:shadow-md hover:border-indigo-100"
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-indigo-900">{feature.title}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-indigo-900">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
@@ -96,7 +98,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

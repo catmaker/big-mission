@@ -18,7 +18,7 @@ export default function BoardSection() {
   if (!isMounted) return null;
 
   return (
-    <section className="py-16">
+    <section>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-semibold mb-2">게시판</h2>
@@ -36,16 +36,16 @@ export default function BoardSection() {
             </Button>
           ) : (
             <>
-            <p className="text-gray-600">
-              게시글을 작성하려면 로그인이 필요합니다.
-            </p>
+              <p className="text-gray-600">
+                게시글을 작성하려면 로그인이 필요합니다.
+              </p>
               <Button
                 variant="outline"
                 className="mt-8"
                 onClick={() => router.push("/signin")}
-            >
-              첫 게시글 작성하기
-            </Button>
+              >
+                첫 게시글 작성하기
+              </Button>
             </>
           )}
         </div>
