@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BIGS 프론트엔드 개발자 과제
 
-## Getting Started
+## 프로젝트 소개
 
-First, run the development server:
+BIGS 프론트엔드 개발자 채용 과제로 제작된 게시판 웹 애플리케이션입니다.
+
+## 배포 링크
+
+[배포 링크](https://front-mission.vercel.app/)
+
+## 프로젝트 실행 방법
 
 ```bash
+git clone https://github.com/catmaker/big-mission.git
+cd big-mission
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 기술 스택
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- React
+- Next.js
+- TypeScript
+- MobX
+- React Query
+- axios
+- Tailwind CSS
+- Shadcn UI
+- React Hook Form
+- React Table
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 주요 기능
 
-## Learn More
+- 회원가입 및 로그인
+- 게시글 CRUD
+- 반응형 디자인
+- 페이지네이션
 
-To learn more about Next.js, take a look at the following resources:
+## 구현 내용
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 사용자 인증
+  - 회원가입
+  - 로그인/로그아웃
+  - 사용자 정보 표시
+- 게시판 기능
+  - 게시글 목록 조회
+  - 카테고리별 게시글 목록 조회
+  - 최신순 정렬
+  - 게시글 작성
+  - 게시글 수정/삭제
+  - 페이지네이션
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 프로젝트 구조
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+big-mission/
+├── public/
+├── src/
+│ ├── app/
+│ ├── components/
+│ ├── hooks/
+│ ├── lib/
+│ ├── providers/
+│ ├── stores/
+│ ├── types/
+│ ├── utils/
+├── .gitignore
+├── package.json
+├── tsconfig.json
+├── next.config.mjs
+├── tailwind.config.ts
+├── postcss.config.mjs
+├── README.md
+```
