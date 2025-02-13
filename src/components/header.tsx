@@ -41,21 +41,21 @@ export default function Header({ className }: HeaderProps) {
               <div className="flex items-center gap-1">
                 <Button
                   variant="ghost"
-                  className="text-sm"
+                  className="text-xs text-gray-800 hover:text-black transition-colors"
                   onClick={() => router.push("/boards/write")}
                 >
                   글쓰기
                 </Button>
                 <Button
                   variant="ghost"
-                  className="text-sm"
+                  className="text-xs text-gray-800 hover:text-black transition-colors"
                   onClick={() => router.push("/profile")}
                 >
                   마이페이지
                 </Button>
                 <Button
                   variant="ghost"
-                  className="text-sm"
+                  className="text-xs text-gray-800 hover:text-black transition-colors"
                   onClick={() => authStore.logout()}
                 >
                   로그아웃
@@ -65,14 +65,14 @@ export default function Header({ className }: HeaderProps) {
               <div className="flex items-center space-x-2">
                 <Button
                   variant="ghost"
-                  className="text-sm"
+                  className="text-xs text-gray-800 hover:text-black transition-colors"
                   onClick={() => router.push("/signin")}
                 >
                   로그인
                 </Button>
                 <Button
                   variant="ghost"
-                  className="text-sm"
+                  className="text-xs text-gray-800 hover:text-black transition-colors"
                   onClick={() => router.push("/signup")}
                 >
                   회원가입

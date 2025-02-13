@@ -20,8 +20,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col h-screen">
             <Header className="shrink-0" />
             <main className="flex-grow overflow-y-auto">{children}</main>
+            <Footer className="shrink-0" />
           </div>
-          <Footer className="shrink-0" />
         </ErrorBoundary>
       </ToastProvider>
     </QueryProviders>
